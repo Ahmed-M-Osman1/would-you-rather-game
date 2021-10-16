@@ -18,12 +18,16 @@ class MainPage extends Component {
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ questions, author, users }, {id} ) {
+    const question = questions[id]
   return {
     questionIDs: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
     ),
+    author,
+    users,
   };
 }
+
 
 export default connect(mapStateToProps)(MainPage);
