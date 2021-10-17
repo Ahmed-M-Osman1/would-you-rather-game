@@ -5,7 +5,7 @@ import { handleInitialData } from "../action/Shared";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MainPage from "./MainPage";
-
+import Leaderboard from './LeaderBoard'
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
