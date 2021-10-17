@@ -2,22 +2,37 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import UserData from './User'
 
-class Leaderboard extends Component {
+class LeaderBoard extends Component {
   render() {
-    const { userData } = this.props;
+    const { UserData } = this.props;
     return (
       <div className="leaderboard">
         {UserData.map((user) => (
-          <UserData key={user.id} user={user} />
-        ))}
+          <div>
+                  <div className="content-text">
+                    <p className="player-name">{user.name}</p>
+                    <div className="player-stats">
+                      <p>Number Of Questions:</p>
+                      <p>{user.questions.length}</p>
+                    </div>
+                    <div className="player-stats">
+                      <p>Number Of Answers:</p>
+                      <p>{user.keys.length}</p>
+                    </div>
+                  </div>
+                  <div className="total-score">
+                    <div className="total-score-header">Score</div>
+                    <div className="score-circle">{}</div>
+                  </div>
+                </div>
+            ))}
       </div>
     );
   }
 }
 
 function mapStateToProps({ users }) {
-  // The answers are saved as an object. However, the questions are saved as an array
-  // So we need to approach them in different ways to calculate the total score
+  // we can calculate the score by add answers+Q but the answers are object so  
   const players = Object.values(users)
     .map(
       (player) =>
@@ -32,4 +47,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Leaderboard);
+export default connect(mapStateToProps)(LeaderBoard);
