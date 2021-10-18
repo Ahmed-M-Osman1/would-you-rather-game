@@ -9,20 +9,21 @@ class NavBar extends Component {
   handleSignOutCLick = () => {
     const { dispatch } = this.props;
 
-    dispatch(setAuthedUser("SIGN_OUT"));
+    dispatch(setAuthedUser("No_Active_user"));
   };
   render() {
     const { signOut, user } = this.props;
     return (
       <div className="tab-navigation">
         <ul className="tab-menu">
-          <NavLink exact to="/poll">
+          <NavLink exact to="/questions">
             Main Page
           </NavLink>
           <NavLink to="/add">New Question</NavLink>
           <NavLink to="/leaderboard" /*component=Leaderboard*/ >Leader board</NavLink>
           <li>
-            Hello, {signOut ? "Please Login" : "user.name"}
+          Hello, {signOut ? "Please Login" : " Welcome back " + user.name}
+            
             <div>
               <button onClick={this.handleSignOutCLick}>Sign Out</button>
             </div>
@@ -37,7 +38,7 @@ class NavBar extends Component {
 function mapStateToProps({ authedUser, users }) {
   const user = users[authedUser];
   let signOut = false;
-  if (authedUser === "LOGGED_OUT") {
+  if (authedUser === "No_Active_user") {
     signOut = true;
   }
   return {

@@ -34,7 +34,6 @@ export function handleAskQuestion(optionOneText, optionTwoText) {
         optionTwoText,
         author: authedUser,
       }).then((question) => {
-        console.log("Your new question: ", question);
         dispatch(theAskQuestions(question));
         dispatch(askQuestion(authedUser, question.id));
       });

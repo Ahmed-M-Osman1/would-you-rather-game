@@ -5,7 +5,7 @@ import {
 } from "../action/Question";
 
 export default function questions(state = {}, action) {
-  const { authedUser, questionId, answer } = action;
+  const { authedUser, questionId, answers } = action;
   switch (action.type) {
     case RECEIVE_QUESTIONS:
       return {
@@ -22,9 +22,9 @@ export default function questions(state = {}, action) {
         ...state,
         [questionId]: {
           ...state[questionId],
-          [answer]: {
-            ...state[questionId][answer],
-            votes: state[questionId][answer].votes.concat(authedUser),
+          [answers]: {
+            ...state[questionId][answers],
+            votes: state[questionId][answers].votes.concat(authedUser),
           },
         },
       };

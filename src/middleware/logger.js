@@ -1,4 +1,4 @@
-const logger = (store) => (next) => (action) => {
+  const logger = (store) => (next) => (action) => {
   console.group(action.type);
   console.log("The action is : ",action);
   const returnValue = next(action);

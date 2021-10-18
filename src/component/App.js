@@ -1,25 +1,83 @@
-import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import NavBar from "./NavBar";
-import { handleInitialData } from "../action/Shared";
 import React, { Component } from "react";
+import { handleInitialData } from "../action/Shared";
+import PropTypes from "prop-types";
+import NavBar from "./NavBar";
+import LeaderBoard from "./LeaderBoard";
+import QuestionsPage from "./QuestionsPage";
+import LoginPage from "./LoginPage";
+import NotFound from "./page-404";
+import AddNewQuestion from "./AddNewQuestion";
+import MainQuestionsPage from "./MainQuestionsPage";
 import { connect } from "react-redux";
-import MainPage from "./MainPage";
-import Leaderboard from './LeaderBoard'
+import {
+  Route,
+  Switch,
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
+
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleInitialData();
   }
   render() {
     return (
       <Router>
-        <div className="App">
+      <React.Fragment>
+        {this.props.loading ? null : (
+          <React.Fragment>
           <NavBar />
-          <MainPage />
-        </div>
+            <div className="app-content">
+              {this.props.loggedOutUser ? (
+                <LoginPage />
+              ) : (
+                <Switch>
+                  <Route exact path="/">
+                    <Redirect to="questions" />
+                  </Route>
+                  <Route exact path="/questions">
+                    <MainQuestionsPage />
+                  </Route>
+                  <Route path="/questions/:questiondID">
+                    <QuestionsPage />
+                  </Route>
+                  <Route path="/Leaderboard">
+                    <LeaderBoard />
+                  </Route>
+                  <Route path="/add">
+                    <AddNewQuestion />
+                  </Route>
+                  <Route path="/not-found">
+                    <NotFound />
+                  </Route>
+                </Switch>
+              )}
+              ;
+            </div>
+          </React.Fragment>
+        )}
+      </React.Fragment>
       </Router>
     );
   }
 }
 
-export default connect()(App);
+App.propTypes = {
+  loggedOutUser: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps({ authedUser }) {
+  return {
+    loggedOutUser: authedUser === "No_Active_user",
+    loading: authedUser === null,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => dispatch(handleInitialData()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
