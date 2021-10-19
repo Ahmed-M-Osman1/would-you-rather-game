@@ -46,21 +46,21 @@ export function handleAskQuestion(optionOneText, optionTwoText) {
 // When answer question
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
-export function theAnswerQuestions({ authedUser, questionId, pollAnswer }) {
+export function theAnswerQuestions({ authedUser, questionId, answer }) {
     return {
       type: ANSWER_QUESTION,
       authedUser,
       questionId,
-      pollAnswer,
+      answer,
     };
   }
 
-  export function handleAnswerQuestion(questionId, pollAnswer) {
+  export function handleAnswerQuestion(questionId, answer) {
     return (dispatch, getState) => {
       const { authedUser } = getState();
-      dispatch(theAnswerQuestions({ authedUser, questionId, pollAnswer }));
-      dispatch(answerQuestion({ authedUser, questionId, pollAnswer }));
-      return saveQuestionAnswer({ authedUser, questionId, pollAnswer })
+      dispatch(theAnswerQuestions({ authedUser, questionId, answer }));
+      dispatch(answerQuestion({ authedUser, questionId, answer }));
+      return saveQuestionAnswer({ authedUser, questionId, answer })
     };
   }
   

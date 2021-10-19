@@ -28,7 +28,3 @@ export default function RankingUsers(props) {
     </div>
   );
 }
-
-RankingUsers.propTypes = {
-  winner: PropTypes.array.isRequired,
-};

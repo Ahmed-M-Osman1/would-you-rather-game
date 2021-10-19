@@ -3,12 +3,13 @@ import { RECEIVE_USERS, ASK_QUESTIONS, ANSWER_QUESTION } from "../action/Users";
 export default function users(state = {}, action) {
   const { authedUser, questionId, answer } = action;
   switch (action.type) {
-    case RECEIVE_USERS:
+    case RECEIVE_USERS: {
       return {
         ...state,
         ...action.users,
       };
-    case ANSWER_QUESTION:
+    }
+    case ANSWER_QUESTION: {
       return {
         ...state,
         [authedUser]: {
@@ -16,14 +17,16 @@ export default function users(state = {}, action) {
           answers: Object.assign(state[authedUser].answers, { [questionId]: answer }),
         },
       };
-    case ASK_QUESTIONS:
+    }
+    case ASK_QUESTIONS: {
       return {
         ...state,
         [authedUser]: {
-          ...state[authedUser],
-          questions: state[action.question.author].questions.concat([questionId]),
-        },
-      };
+          ...authedUser,
+          questions: state[authedUser].questions.concat([questionId]),
+        }
+      }
+    }
     default:
       return state;
   }

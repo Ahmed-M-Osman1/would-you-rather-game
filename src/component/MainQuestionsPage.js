@@ -41,12 +41,11 @@ MainQuestionsPage.propTypes = {
 
 function mapStateToProps({ questions, users, authedUser }) {
   //pull out keys of the answers.
-
   const userAnsweredQuestions = Object.keys(users[authedUser].answers);
 
   // Filter out the answered Questions.
   const theAnsweredQuestion = Object.values(questions)
-
+  
     .filter((question) => userAnsweredQuestions.includes(question.id)) // check for the the id exist in the user answered id.
     .map((question) => Object.assign({}, question, { type: "answeredQ" })) //Add Type to the object to used for sort.
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp

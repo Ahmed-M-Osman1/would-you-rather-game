@@ -20,7 +20,7 @@ class NavBar extends Component {
             Main Page
           </NavLink>
           <NavLink to="/add">New Question</NavLink>
-          <NavLink to="/leaderboard" /*component=Leaderboard*/ >Leader board</NavLink>
+          <NavLink to="/leaderboard" >Leader board</NavLink>
           <li>
           Hello, {signOut ? "Please Login" : " Welcome back " + user.name}
             
