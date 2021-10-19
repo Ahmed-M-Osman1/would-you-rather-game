@@ -15,7 +15,7 @@ class MainQuestionsPage extends Component {
               <QuestionsNav />
               <Switch>
                 <Route exact path="/questions">
-                  <Redirect to="questions/answered" />
+                  <Redirect to="questions/unanswered" />
                 </Route>
                 <Route path="/questions/answered">
                   <ListOfQuestions questions={this.props.theAnsweredQuestion} />
@@ -48,13 +48,13 @@ function mapStateToProps({ questions, users, authedUser }) {
   const theAnsweredQuestion = Object.values(questions)
 
     .filter((question) => userAnsweredQuestions.includes(question.id)) // check for the the id exist in the user answered id.
-    .map((question) => Object.assign({}, question, { type: "answered" })) //Add Type to the object to used for sort.
+    .map((question) => Object.assign({}, question, { type: "answeredQ" })) //Add Type to the object to used for sort.
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp
   // Filter out the unAnswered questions. (repeat the previous)
 
   const theUnAnsweredQuestions = Object.values(questions)
     .filter((question) => !userAnsweredQuestions.includes(question.id))
-    .map((question) => Object.assign({}, question, { type: "unanswered" }))
+    .map((question) => Object.assign({}, question, { type: "unansweredQ" }))
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp
   return {
     theAnsweredQuestion,

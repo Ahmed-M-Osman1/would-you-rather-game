@@ -7,7 +7,7 @@ export default function NotFound() {
     <div>
     <p> 404. Page Not Found </p>
       <NavLink to="/">
-        <button id="returnHome"> Go to home </button>
+        <button> Go to Main Page </button>
       </NavLink>
     </div>
   );

@@ -7,7 +7,7 @@ class LeaderBoard extends Component {
   render() {
     const { winners } = this.props;
     return (
-      <div className="leaderboard">
+      <div>
         {winners.map((winner) => (
           <RankingUsers key={winner.id} winner={winner} />
         ))}

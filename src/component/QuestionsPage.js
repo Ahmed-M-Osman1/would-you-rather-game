@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { handleAnswerQuestion } from "../action/Question";
 import { connect } from "react-redux";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link } from "react-router-dom";
 
 class QuestionsPage extends Component {
   state = {
@@ -25,34 +25,26 @@ class QuestionsPage extends Component {
   };
 
   render() {
-    if (this.props.not_found) {
-      return <Redirect to="/not-found" />;
-    }
-
+    switch (this.props.not_found) {
+      case true :
+        return <Redirect to="/not-found" />
+      case false :
+    const { user, authedUser, isTheQAnswered, question } = this.props;
     const { optionOne, optionTwo } = question;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
-    const { user, answered, authedUser, question } = this.props;
-    return (
-      <div className="question color-primary">
-        <div className="question-header">
-        </div>
-        <div className={`item-content${answered ? " answer-content" : ""}`}>
-          <div className="content-image">
+
+      return (
+        <Link to={`/questions/${question.id}`}>
+        <div>
+        <div>
+          <div>
             <img alt="avatar" src={user.avatarURL} />
           </div>
-          <div className="content-text">
-            <p className="would-you">
-              {answered ? "Would You Rather" : "Results"}
-            </p>
-            {answered ? (
+          <div>
+            {isTheQAnswered ? (
               <form>
-                <div
-                  className={`answer-section${
-                    question.optionOne.votes.includes(authedUser)
-                      ? " chosen-answer"
-                      : ""
-                  }`}
-                >
+                <div>
+                <div></div>
                   <label>{optionOne.text}</label>
                   <div
                     data-label={`${this.voteCalculation(
@@ -67,11 +59,11 @@ class QuestionsPage extends Component {
                             optionOne.votes.length,
                             totalVotes
                           ) + " % ",
-                      }}>
-                      {console.log(3)}
+                      }}
+                    >
                     </div>
                   </div>
-                  <label className="choice-percentage">{`${optionOne.votes.length} Out Of ${totalVotes}`}</label>
+                  <label>{`${optionOne.votes.length} Out Of ${totalVotes}`}</label>
                 </div>
                 <div
                   className={`answer-section${
@@ -97,11 +89,12 @@ class QuestionsPage extends Component {
                       }}
                     ></div>
                   </div>
-                  <div className="choice-percentage">{`${optionTwo.votes.length} Out Of ${totalVotes}`}</div>
+                  <div>{`${optionTwo.votes.length} Out Of ${totalVotes}`}</div>
                 </div>
               </form>
             ) : (
               <form onSubmit={this.handleSubmit}>
+              <div></div>
                 <input
                   type="radio"
                   id="optionOne"
@@ -121,27 +114,21 @@ class QuestionsPage extends Component {
                 <label htmlFor="optionTwo">{optionTwo.text}</label>
                 <input type="submit" value="Submit Vote" className="voteBtn" />
               </form>
-              
             )}
           </div>
         </div>
       </div>
-      
+      </Link>
     );
   }
-}
+}}
 
-QuestionsPage.propTypes = {
-  question: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  answered: PropTypes.bool.isRequired,
-  authedUser: PropTypes.string.isRequired,
-};
+
 
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   const id = match.params.questiondID;
   const question = questions[id];
-  let answered = false;
+  let isTheQAnswered = true;
   const not_found = true;
   if (question === undefined) {
     return {
@@ -152,16 +139,23 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
       question.optionOne.votes.includes(authedUser) ||
       question.optionTwo.votes.includes(authedUser)
     ) {
-      answered = true;
+      isTheQAnswered = true;
     }
   }
   const user = users[question.author];
   return {
     question,
     user,
-    answered,
+    isTheQAnswered,
     authedUser,
   };
 }
+
+QuestionsPage.propTypes = {
+  questions: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  isTheQAnswered: PropTypes.bool.isRequired,
+  authedUser: PropTypes.string.isRequired,
+};
 
 export default withRouter(connect(mapStateToProps)(QuestionsPage));

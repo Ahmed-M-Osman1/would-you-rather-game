@@ -7,26 +7,26 @@ class AddNewQuestion extends Component {
   // add local state for the asked Questions.
   state = {
     redirect: false,
-    questionOne: "",
-    questionTwo: "",
+    optionOne: "",
+    optionTwo: "",
   };
 
 // handleChange as tyler
-handleChange = (e) => {
-    e.preventDefault();
-    const element = e.target;
+handleChange = (event) => {
+    event.preventDefault();
+    const element = event.target;
     this.setState({ [element.id]: element.value });
   };
 
 
 // handleSubmit as tyler
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
 
     const { dispatch } = this.props;
-    const { questionOne, questionTwo } = this.state;
+    const { optionOne, optionTwo } = this.state;
 
-    dispatch(handleAskQuestion(questionOne, questionTwo));
+    dispatch(handleAskQuestion(optionOne, optionTwo));
 
     this.setState({ redirect: true });
   };
@@ -36,28 +36,26 @@ handleChange = (e) => {
       return <Redirect to="/" />;
     } else {
       return (
-        <div className="question new-question">
-          <div className="new-question-header">
+        <div>
+          <div>
             <p> Ask New Question </p>
           </div>
-          <div className="new-question-content">
+          <div>
             <h1>Would You Rather?</h1>
             <form onSubmit={this.handleSubmit}>
               <input
               onChange={this.handleChange}
-              id="questionOptionOne"
+                id="optionOne"
                 type="text"
                 name="questionOptionOne"
-                maxLength="100"
                 placeholder="First Option"
               />
               <p> OR </p>
               <input
               onChange={this.handleChange}
-              id="questionOptionTwo"
+              id="optionTwo"
               type="text"
               name="questionOptionTwo"
-              maxLength="100"
               placeholder="Sec. Option"
               />
               <input  id="submit" type="submit" value="Submit"/>

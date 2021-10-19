@@ -14,8 +14,8 @@ class NavBar extends Component {
   render() {
     const { signOut, user } = this.props;
     return (
-      <div className="tab-navigation">
-        <ul className="tab-menu">
+      <div>
+        <ul>
           <NavLink exact to="/questions">
             Main Page
           </NavLink>

@@ -9,20 +9,20 @@ class EachQuestionItem extends Component {
 
     const { user } = this.props;
     return (
-      <div className="question">
-        <div className="question-header">
+      <div>
+        <div>
           <p>{user.name} Ask: Would You Rather</p>
         </div>
-        <div className="item-content poll-content">
-          <div className="content-image">
+        <div>
+          <div>
             <img alt="avatar pic" src={user.avatarURL} />
           </div>
-          <div className="content-seperator" />
-          <div className="content-text">
+          <div/>
+          <div>
             <label>{optionOne.text}</label>
             <label>{optionTwo.text}</label>
             <NavLink to={`/questions/${id}`}>
-              <button className="voteBtn">{type === "unanswered" ? "View And Vote" : "View Answer"}</button>
+              <button>{type === "unansweredQ" ? "Answer this Question" : "View Results"}</button>
             </NavLink>
           </div>
         </div>

@@ -6,7 +6,7 @@ class listOfQuestions extends Component {
   render() {
     const { questions } = this.props;
     return (
-      <div className="questions-list">
+      <div>
         {questions.map((question) => (
           <EachQuestionItem key={question.id} question={question} />
         ))}

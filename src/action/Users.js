@@ -16,13 +16,13 @@ export function askQuestion(authedUser, questionId) {
       type: ASK_QUESTIONS,
       authedUser,
       questionId,
-    };
+      };
   }
 
   //Action: Answer Q
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
-export function answerQuestion({ authedUser, questionId, pollAnswer }) {
+export function answerQuestion( authedUser, questionId, pollAnswer ) {
     return {
       type: ANSWER_QUESTION,
       authedUser,

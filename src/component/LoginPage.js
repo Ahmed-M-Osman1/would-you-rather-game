@@ -17,14 +17,14 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="login">
-        <div className="login-header">
+      <div>
+        <div>
           <p>Welcome to WOULD YOU RATHER game</p>
           <p>This Game is simple. You should Choose between 2 different option</p>
           <p>Please Choose one of the characters to start</p>
         </div>
           <span id="login-form">
-            <select name="users" id="users">
+            <select id="users">
               {this.props.allUsers.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name}
@@ -35,7 +35,7 @@ class LoginPage extends Component {
               Sign In
             </button>
           </span>
-          <div className="content-seperator"></div>
+          <div></div>
         </div>
     );
   }
