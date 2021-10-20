@@ -27,7 +27,7 @@ class App extends Component {
         {this.props.loading ? null : (
           <React.Fragment>
           <NavBar />
-            <div className="app-content">
+            <div className="outerDiv">
               {this.props.loggedOutUser ? (
                 <LoginPage />
               ) : (

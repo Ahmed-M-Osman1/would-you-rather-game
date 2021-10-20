@@ -27,6 +27,7 @@ class MainQuestionsPage extends Component {
                 </Route>
               </Switch>
             </div>
+            
           </div>
         </React.Fragment>
       </BrowserRouter>
@@ -55,10 +56,12 @@ function mapStateToProps({ questions, users, authedUser }) {
     .filter((question) => !userAnsweredQuestions.includes(question.id))
     .map((question) => Object.assign({}, question, { type: "unansweredQ" }))
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp
-  return {
+    return {
     theAnsweredQuestion,
     theUnAnsweredQuestions,
   };
+
+
 }
 
 export default withRouter(connect(mapStateToProps)(MainQuestionsPage));
