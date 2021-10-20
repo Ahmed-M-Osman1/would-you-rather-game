@@ -1,5 +1,5 @@
-import { askQuestion, answerQuestion } from "./Users";
 import { saveQuestionAnswer, saveQuestion } from "../utilities/Api";
+import { addAnswer, addQuestion } from "./Users";
 
 // Receiving the question
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -17,7 +17,7 @@ export function receiveQuestions(questions) {
 // When ask question
 export const ASK_QUESTIONS = "ASK_QUESTIONS";
 
-export function theAskQuestions (question) {
+export function askQuestion (question) {
   return {
     type: ASK_QUESTIONS,
     question,
@@ -28,14 +28,14 @@ export function theAskQuestions (question) {
 export function handleAskQuestion(optionOneText, optionTwoText) {
     return (dispatch, getState) => {
 
-        const { authedUser } = getState();
+      const { authedUser } = getState();
       return saveQuestion({
         optionOneText,
         optionTwoText,
         author: authedUser,
       }).then((question) => {
-        dispatch(theAskQuestions(question));
-        dispatch(askQuestion(authedUser, question.id));
+        dispatch(askQuestion( question ));
+        dispatch(addQuestion(authedUser, question.id));
       });
     };
   }
@@ -46,7 +46,7 @@ export function handleAskQuestion(optionOneText, optionTwoText) {
 // When answer question
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
-export function theAnswerQuestions({ authedUser, questionId, answer }) {
+export function answerQuestion({ authedUser, questionId, answer }) {
     return {
       type: ANSWER_QUESTION,
       authedUser,
@@ -58,9 +58,13 @@ export function theAnswerQuestions({ authedUser, questionId, answer }) {
   export function handleAnswerQuestion(questionId, answer) {
     return (dispatch, getState) => {
       const { authedUser } = getState();
-      dispatch(theAnswerQuestions({ authedUser, questionId, answer }));
       dispatch(answerQuestion({ authedUser, questionId, answer }));
-      return saveQuestionAnswer({ authedUser, questionId, answer })
+      dispatch(addAnswer({ authedUser, questionId, answer }));
+      return saveQuestionAnswer({ 
+        authedUser, 
+        qid: questionId, 
+        answer }
+      )
     };
   }
   

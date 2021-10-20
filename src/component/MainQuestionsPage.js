@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ListOfQuestions from "./ListOfQuestions";
 import PropTypes from "prop-types";
-import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
+import { Route, withRouter, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import QuestionsNav from "./QuestionsNav";
 import { connect } from "react-redux";
 
@@ -61,4 +61,4 @@ function mapStateToProps({ questions, users, authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(MainQuestionsPage);
+export default withRouter(connect(mapStateToProps)(MainQuestionsPage));

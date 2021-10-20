@@ -9,24 +9,24 @@ export function receiveUsers (users) {
 }
 
 // Action: Ask Q
-export const ASK_QUESTIONS = "ASK_QUESTIONS";
+export const ADD_QUESTION = "ADD_QUESTION";
 
-export function askQuestion(authedUser, questionId) {
+export function addQuestion(authedUser, questionId) {
     return {
-      type: ASK_QUESTIONS,
+      type: ADD_QUESTION,
       authedUser,
-      questionId,
+      questionId
       };
   }
 
   //Action: Answer Q
-export const ANSWER_QUESTION = "ANSWER_QUESTION";
+export const ADD_ANSWER = "ADD_ANSWER";
 
-export function answerQuestion( authedUser, questionId, pollAnswer ) {
+export function addAnswer( authedUser, questionId, answer ) {
     return {
-      type: ANSWER_QUESTION,
+      type: ADD_ANSWER,
       authedUser,
       questionId,
-      pollAnswer,
+      answer,
     };
   }

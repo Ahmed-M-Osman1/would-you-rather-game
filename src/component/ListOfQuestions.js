@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import EachQuestionItem from "./EachQuestionItem.js";
 
 class listOfQuestions extends Component {
+  
   render() {
     const { questions } = this.props;
     return (

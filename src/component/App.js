@@ -38,9 +38,6 @@ class App extends Component {
                   <Route exact path="/questions">
                     <MainQuestionsPage />
                   </Route>
-                  <Route path="/questions/:questiondID">
-                    <QuestionsPage />
-                  </Route>
                   <Route path="/Leaderboard">
                     <LeaderBoard />
                   </Route>

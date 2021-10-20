@@ -42,7 +42,7 @@ handleChange = (event) => {
           </div>
           <div>
             <h1>Would You Rather?</h1>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <input
               onChange={this.handleChange}
                 id="optionOne"
@@ -58,7 +58,7 @@ handleChange = (event) => {
               name="questionOptionTwo"
               placeholder="Sec. Option"
               />
-              <input  id="submit" type="submit" value="Submit"/>
+              <input  id="submit" type="submit" onClick={this.handleSubmit}/>
             </form>
           </div>
         </div>
