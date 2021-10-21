@@ -16,7 +16,7 @@ class NavBar extends Component {
     return (
       <div>
         <ul>
-          <NavLink exact to="/questions">
+          <NavLink to="/questions">
             Main Page
           </NavLink>
           <NavLink to="/add">New Question</NavLink>

@@ -33,7 +33,7 @@ handleChange = (event) => {
 
   render() {
     if (this.state.redirect === true) {
-      return <Redirect to="/add" />;
+      return <Redirect to="/questions" />;
     } else {
       return (
         <div>

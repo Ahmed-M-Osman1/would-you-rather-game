@@ -15,6 +15,7 @@ import {
   Redirect,
   BrowserRouter as Router,
 } from "react-router-dom";
+import TestComp from "./testComp";
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +23,6 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
       <React.Fragment>
         {this.props.loading ? null : (
           <React.Fragment>
@@ -30,13 +30,17 @@ class App extends Component {
             <div className="outerDiv">
               {this.props.loggedOutUser ? (
                 <LoginPage />
+
               ) : (
-                <Switch>
+                <div>
                   <Route exact path="/">
                     <Redirect to="questions" />
                   </Route>
-                  <Route exact path="/questions">
+                  <Route path="/questions">
                     <MainQuestionsPage />
+                  </Route>
+                  <Route path='/question/:id'>
+                  <TestComp />
                   </Route>
                   <Route path="/Leaderboard">
                     <LeaderBoard />
@@ -47,14 +51,17 @@ class App extends Component {
                   <Route path="/not-found">
                     <NotFound />
                   </Route>
-                </Switch>
+                </div>
+
               )}
-              ;
+
             </div>
           </React.Fragment>
+
         )}
+
       </React.Fragment>
-      </Router>
+      
     );
   }
 }

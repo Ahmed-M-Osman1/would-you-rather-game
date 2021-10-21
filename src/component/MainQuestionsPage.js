@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Route, withRouter, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import QuestionsNav from "./QuestionsNav";
 import { connect } from "react-redux";
-
+import QuestionsPage from './QuestionsPage'
 class MainQuestionsPage extends Component {
   render() {
     return (
@@ -13,6 +13,7 @@ class MainQuestionsPage extends Component {
           <div>
             <div className="questions">
               <QuestionsNav />
+
               <Switch>
                 <Route exact path="/questions">
                   <Redirect to="questions/unanswered" />

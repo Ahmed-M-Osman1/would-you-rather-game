@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { handleAnswerQuestion } from "../action/Question";
 import { connect } from "react-redux";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { handleAnswerQuestion } from "../action/Question";
 
 class QuestionsPage extends Component {
   state = {
     SelectedOption: "Nothing_selected",
+    isTheQAnswered: false,
   };
 
   voteCalculation = (votes, totalVotes) => {
@@ -22,29 +22,32 @@ class QuestionsPage extends Component {
     event.preventDefault();
     const { dispatch, question } = this.props;
     dispatch(handleAnswerQuestion(question.id, this.state.SelectedOption));
+    this.setState({ isTheQAnswered: true });
   };
 
   render() {
-    switch (this.props.not_found) {
-      case true :
-        return <Redirect to="/not-found" />
-      case false :
-    const { user, authedUser, isTheQAnswered, question } = this.props;
+    const { users, authedUser, question } = this.props;
+    const author = users[question.author];
     const { optionOne, optionTwo } = question;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
 
-      return (
-        <Link to={`/questions/${question.id}`}>
+    return (
+      <div>
         <div>
+          <p>{author.name} Ask: Would You Rather</p>
+        </div>
         <div>
           <div>
-            <img alt="avatar" src={user.avatarURL} />
+            <img alt="avatar pic" src={author.avatarURL} />
           </div>
+          <div />
           <div>
-            {isTheQAnswered ? (
+            <label>{optionOne.text}</label>
+            <label>{optionTwo.text}</label>
+            {this.state.isTheQAnswered ? (
               <form>
                 <div>
-                <div></div>
+                  <div></div>
                   <label>{optionOne.text}</label>
                   <div
                     data-label={`${this.voteCalculation(
@@ -60,8 +63,7 @@ class QuestionsPage extends Component {
                             totalVotes
                           ) + " % ",
                       }}
-                    >
-                    </div>
+                    ></div>
                   </div>
                   <label>{`${optionOne.votes.length} Out Of ${totalVotes}`}</label>
                 </div>
@@ -94,7 +96,7 @@ class QuestionsPage extends Component {
               </form>
             ) : (
               <form onSubmit={this.handleSubmit}>
-              <div></div>
+                <div></div>
                 <input
                   type="radio"
                   id="optionOne"
@@ -118,44 +120,19 @@ class QuestionsPage extends Component {
           </div>
         </div>
       </div>
-      </Link>
     );
   }
-}}
-
-
-
-function mapStateToProps({ questions, users, authedUser }, { match }) {
-  const id = match.params.questiondID;
-  const question = questions[id];
-  let isTheQAnswered = true;
-  const not_found = true;
-  if (question === undefined) {
-    return {
-      not_found,
-    };
-  } else {
-    if (
-      question.optionOne.votes.includes(authedUser) ||
-      question.optionTwo.votes.includes(authedUser)
-    ) {
-      isTheQAnswered = true;
-    }
-  }
-  const user = users[question.author];
-  return {
-    question,
-    user,
-    isTheQAnswered,
-    authedUser,
-  };
 }
 
 QuestionsPage.propTypes = {
-  questions: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  isTheQAnswered: PropTypes.bool.isRequired,
-  authedUser: PropTypes.string.isRequired,
+  question: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps)(QuestionsPage));
+function mapStateToProps({ users, authedUser }) {
+  return {
+    authedUser,
+    users,
+  };
+}
+
+export default connect(mapStateToProps)(QuestionsPage);
