@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { handleAskQuestion } from "../action/Question";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import Card from "@mui/material/Card";
+import logo from '../img/logo.png';
+import { Button } from "@material-ui/core";
+import SendIcon from "@mui/icons-material/Send";
 class AddNewQuestion extends Component {
   // add local state for the asked Questions.
   state = {
@@ -37,11 +40,20 @@ handleChange = (event) => {
     } else {
       return (
         <div>
+        <Card
+      sx={{ width: "600px", textAlign: "center" }}
+      style={{
+        marginLeft: "25%",
+        marginTop: "6.3%",
+        overflow: "hidden",
+      }}
+    >
           <div>
             <p> Ask New Question </p>
           </div>
           <div>
-            <h1>Would You Rather?</h1>
+          <img style={{ width: "300px", height: "250px" }} src={logo}/>
+          <div style={{ margin: "3%"}}>
             <form>
               <input
               onChange={this.handleChange}
@@ -58,9 +70,23 @@ handleChange = (event) => {
               name="questionOptionTwo"
               placeholder="Sec. Option"
               />
-              <input  id="submit" type="submit" onClick={this.handleSubmit}/>
+<br/>
+              <Button id="submit" type="submit" onClick={this.handleSubmit} type="submit"
+              value="Submit Vote"
+              onClick={this.handleSubmit}
+              variant="contained"
+              style={{
+                margin: "3%",
+                borderRadius: 35,
+                backgroundColor: "#00bcd4",
+                color: 'white',
+                padding: "2px 10px",
+              }}
+              endIcon={<SendIcon />} > Submit Question </Button>
             </form>
           </div>
+          </div>
+          </Card>
         </div>
       );
     }

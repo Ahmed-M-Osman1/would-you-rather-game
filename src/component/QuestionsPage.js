@@ -7,6 +7,9 @@ import { Button } from "@material-ui/core";
 import SendIcon from "@mui/icons-material/Send";
 import HomeIcon from '@mui/icons-material/Home';
 import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+
 class QuestionsPage extends Component {
   state = {
     SelectedOption: "optionOne",
@@ -38,65 +41,49 @@ class QuestionsPage extends Component {
 
     return (
       <div>
-        <div>
-          <p>{thisQuestion.author} Ask: Would You Rather</p>
-        </div>
+        
+        <Card
+      sx={{ width: "600px", textAlign: "center" }}
+      style={{
+        marginLeft: "25%",
+        marginTop: "6.3%",
+        overflow: "hidden",
+      }}
+    >
+    <div>
+    <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
+          <p style={{ color: '#1a237e', fontWeight: "bold" , fontSize: "26px"}} >{thisQuestion.author} Ask: Would You Rather ? </p>
+        
         <div>
           <div>
-            <img alt="avatar pic" src={askedUser.avatarURL} />
+            <img style={{
+              width: "200px",
+              height: "200px",
+              display: "flex",
+              marginRight: "auto",
+              float: "left",
+            }} alt="avatar pic" src={askedUser.avatarURL} />
           </div>
           <div />
           <div>
-            <label>{optionOne.text}</label>
-            <label>{optionTwo.text}</label>
             {this.props.isTheQAnswered ? (
               <form>
-                <div>
-                  <div></div>
-                  <label>{optionOne.text}</label>
-                  <div
-                    data-label={`${this.voteCalculation(
-                      optionOne.votes.length,
-                      totalVotes
-                    )} % Complete`}
-                  >
-                    <div
-                      style={{
-                        width:
-                          this.voteCalculation(
-                            optionOne.votes.length,
-                            totalVotes
-                          ) + " % ",
-                      }}
-                    ></div>
+              <div>
+                <div >
+                  <div > {
+                    thisQuestion.optionOne.votes.includes(authedUser) ? <DoneOutlineOutlinedIcon /> : null
+                  } {optionOne.text}
                   </div>
-                  <label>{`${optionOne.votes.length} Out Of ${totalVotes}`}</label>
+                  <label >{`${optionOne.votes.length} Out Of ${totalVotes} ` +'('+ Math.floor((100*`${optionOne.votes.length}`)/`${totalVotes}`) +'%)'} </label>
                 </div>
-                <div
-                  className={`answer-section${
-                    thisQuestion.optionTwo.votes.includes(authedUser)
-                      ? " chosen-answer"
-                      : ""
-                  }`}
-                >
-                  <label>{optionTwo.text}</label>
-                  <div
-                    data-label={`${this.voteCalculation(
-                      optionTwo.votes.length,
-                      totalVotes
-                    )} % Complete`}
-                  >
-                    <div
-                      style={{
-                        width:
-                          this.voteCalculation(
-                            optionTwo.votes.length,
-                            totalVotes
-                          ) + " % ",
-                      }}
-                    ></div>
+
+                <div >
+                  <div > {
+                    thisQuestion.optionTwo.votes.includes(authedUser) ? <DoneOutlineOutlinedIcon /> : null
+                  } {optionTwo.text}
                   </div>
-                  <div>{`${optionTwo.votes.length} Out Of ${totalVotes}`}</div>
+                  <label>{`${optionTwo.votes.length} Out Of ${totalVotes} ` +'('+ Math.floor((100*`${optionTwo.votes.length}`)/`${totalVotes}`) +'%)' }</label>
+                </div>
                 </div>
                 <Button
                 style={{
@@ -124,6 +111,7 @@ class QuestionsPage extends Component {
                   onChange={this.handleChange}
                 />
                 <label htmlFor="optionOne">{optionOne.text}</label>
+                <p style={{ fontSize: '15 px', color:'#bf360c' }}> OR </p>
                 <input
                   type="radio"
                   id="optionTwo"
@@ -142,6 +130,7 @@ class QuestionsPage extends Component {
                     borderRadius: 35,
                     backgroundColor: "#42a5f5",
                     padding: "2px 10px",
+                    marginTop: '2%'
                   }}
                   endIcon={<SendIcon />}
                 >
@@ -151,8 +140,10 @@ class QuestionsPage extends Component {
             )}
           </div>
         </div>
+        </Typography>
       </div>
-
+      </Card>
+      </div>
     );
   }
 }

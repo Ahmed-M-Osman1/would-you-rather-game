@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RankingUsers from "./RankingUsers";
+import Card from "@mui/material/Card";
 
 class LeaderBoard extends Component {
   render() {
     const { winners } = this.props;
     return (
       <div>
+      
         {winners.map((winner) => (
           <RankingUsers key={winner.id} winner={winner} />
         ))}
+       
       </div>
     );
   }

@@ -15,6 +15,9 @@ import EachQuestionItem from "./EachQuestionItem";
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import { Button } from "@material-ui/core";
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 class MainQuestionsPage extends Component {
   state = {
     displayUnanswered: true,
@@ -34,12 +37,16 @@ class MainQuestionsPage extends Component {
       <React.Fragment>
         <div>
           <div className="questions">
-            <button onClick={this.handleSortingAnsweredQuestion}>
+          <ButtonGroup style={{ backgroundColor: "#42a5f5", position: 'absolute', marginLeft: '35%', marginTop: '-0.7%'}}>
+          <Button variant="contained" onClick={this.handleSortingAnsweredQuestion} >
               Answered Questions
-            </button>
-            <button onClick={this.handleSortingUnansweredQuestion}>
+            </Button>
+            <Button variant="contained" onClick={this.handleSortingUnansweredQuestion}>
               Unanswered Questions
-            </button>
+            </Button>
+            </ButtonGroup>
+            </div>
+            <div>
             <div>
               {this.state.displayUnanswered ? (
                 <div className="centered">
