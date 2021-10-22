@@ -3,6 +3,8 @@
 This project is a part of become react & redux FWD scholarship (https://egfwd.com/) at Udacity (https://www.udacity.com/).
 
 
+![Alt Text](https://github.com/akiid777/would-you-rather-game/blob/master/would-you-rather-game.gif)
+
 
 ## Available Scripts
 
