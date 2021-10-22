@@ -22,6 +22,8 @@ You will also see any lint errors in the console.
 
 
 ### File tree:
+
+File tree of this project: 
 ```
 ├── package.json
 ├── package-lock.json
