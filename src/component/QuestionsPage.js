@@ -38,13 +38,6 @@ class QuestionsPage extends Component {
 
     return (
       <div>
-      <Card sx={{ width: "800px" ,textAlign: "center" }}
-      style={{
-        position: "absolute",
-        left: "20%",
-        top: "10%",
-      }}
-      >
         <div>
           <p>{thisQuestion.author} Ask: Would You Rather</p>
         </div>
@@ -158,7 +151,6 @@ class QuestionsPage extends Component {
             )}
           </div>
         </div>
-        </Card>
       </div>
 
     );
