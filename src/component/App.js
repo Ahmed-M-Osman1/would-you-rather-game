@@ -40,7 +40,7 @@ class App extends Component {
                     <MainQuestionsPage />
                   </Route>
                   <Route path='/question/:id'>
-                  <TestComp />
+                  <QuestionsPage />
                   </Route>
                   <Route path="/Leaderboard">
                     <LeaderBoard />

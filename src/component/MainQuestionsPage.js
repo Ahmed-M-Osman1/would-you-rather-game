@@ -1,37 +1,61 @@
 import React, { Component } from "react";
 import ListOfQuestions from "./ListOfQuestions";
 import PropTypes from "prop-types";
-import { Route, withRouter, Switch, Redirect, BrowserRouter } from "react-router-dom";
+import {
+  Route,
+  withRouter,
+  Switch,
+  Redirect,
+  BrowserRouter,
+} from "react-router-dom";
 import QuestionsNav from "./QuestionsNav";
 import { connect } from "react-redux";
-import QuestionsPage from './QuestionsPage'
+import QuestionsPage from "./QuestionsPage";
+import EachQuestionItem from "./EachQuestionItem";
+import { useSelector } from "react-redux";
 class MainQuestionsPage extends Component {
+  state = {
+    displayUnanswered: true,
+  };
+
+  handleSortingAnsweredQuestion = () => {
+    return this.setState({ displayUnanswered: false })
+  };
+
+  handleSortingUnansweredQuestion = () => {
+    return this.setState({ displayUnanswered: true });
+  };
+
+
   render() {
     return (
-      <BrowserRouter>
-        <React.Fragment>
-          <div>
-            <div className="questions">
-              <QuestionsNav />
-
-              <Switch>
-                <Route exact path="/questions">
-                  <Redirect to="questions/unanswered" />
-                </Route>
-                <Route path="/questions/answered">
-                  <ListOfQuestions questions={this.props.theAnsweredQuestion} />
-                </Route>
-                <Route path="/questions/unanswered">
-                  <ListOfQuestions
-                    questions={this.props.theUnAnsweredQuestions}
-                  />
-                </Route>
-              </Switch>
+      <React.Fragment>
+        <div>
+          <div className="questions">
+            <button onClick={this.handleSortingAnsweredQuestion}>
+              Answered Questions
+            </button>
+            <button onClick={this.handleSortingUnansweredQuestion}>
+              Unanswered Questions
+            </button>
+            <div>
+              {this.state.displayUnanswered ? (
+                <div>
+                  {this.props.theUnAnsweredQuestions.map((question) => (
+                    <EachQuestionItem key={question.id} question={question} />
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  {this.props.theAnsweredQuestion.map((question) => (
+                    <EachQuestionItem key={question.id} question={question} />
+                  ))}
+                </div>
+              )}
             </div>
-            
           </div>
-        </React.Fragment>
-      </BrowserRouter>
+        </div>
+      </React.Fragment>
     );
   }
 }
@@ -47,7 +71,7 @@ function mapStateToProps({ questions, users, authedUser }) {
 
   // Filter out the answered Questions.
   const theAnsweredQuestion = Object.values(questions)
-  
+
     .filter((question) => userAnsweredQuestions.includes(question.id)) // check for the the id exist in the user answered id.
     .map((question) => Object.assign({}, question, { type: "answeredQ" })) //Add Type to the object to used for sort.
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp
@@ -57,12 +81,10 @@ function mapStateToProps({ questions, users, authedUser }) {
     .filter((question) => !userAnsweredQuestions.includes(question.id))
     .map((question) => Object.assign({}, question, { type: "unansweredQ" }))
     .sort((a, b) => b.timestamp - a.timestamp); //Sort the answers with the time stamp
-    return {
+  return {
     theAnsweredQuestion,
     theUnAnsweredQuestions,
   };
-
-
 }
 
-export default withRouter(connect(mapStateToProps)(MainQuestionsPage));
+export default connect(mapStateToProps)(MainQuestionsPage);

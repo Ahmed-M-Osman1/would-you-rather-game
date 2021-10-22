@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect,withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { handleAnswerQuestion } from "../action/Question";
 
 class QuestionsPage extends Component {
   state = {
     SelectedOption: "Nothing_selected",
-    isTheQAnswered: false,
   };
 
   voteCalculation = (votes, totalVotes) => {
@@ -20,31 +20,33 @@ class QuestionsPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { dispatch, question } = this.props;
-    dispatch(handleAnswerQuestion(question.id, this.state.SelectedOption));
-    this.setState({ isTheQAnswered: true });
+    const { dispatch, thisQuestion } = this.props;
+    dispatch(handleAnswerQuestion(thisQuestion.id, this.state.SelectedOption));
   };
 
   render() {
-    const { users, authedUser, question } = this.props;
-    const author = users[question.author];
-    const { optionOne, optionTwo } = question;
+    if (this.props.not_found) {
+      return <Redirect to="/not-found" />;
+    }
+
+    const { authedUser, thisQuestion, askedUser } = this.props;
+    const { optionOne, optionTwo } = thisQuestion;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
 
     return (
       <div>
         <div>
-          <p>{author.name} Ask: Would You Rather</p>
+          <p>{thisQuestion.author} Ask: Would You Rather</p>
         </div>
         <div>
           <div>
-            <img alt="avatar pic" src={author.avatarURL} />
+            <img alt="avatar pic" src={askedUser.avatarURL} />
           </div>
           <div />
           <div>
             <label>{optionOne.text}</label>
             <label>{optionTwo.text}</label>
-            {this.state.isTheQAnswered ? (
+            {this.props.isTheQAnswered ? (
               <form>
                 <div>
                   <div></div>
@@ -69,7 +71,7 @@ class QuestionsPage extends Component {
                 </div>
                 <div
                   className={`answer-section${
-                    question.optionTwo.votes.includes(authedUser)
+                    thisQuestion.optionTwo.votes.includes(authedUser)
                       ? " chosen-answer"
                       : ""
                   }`}
@@ -95,15 +97,15 @@ class QuestionsPage extends Component {
                 </div>
               </form>
             ) : (
-              <form onSubmit={this.handleSubmit}>
+              <form>
                 <div></div>
                 <input
                   type="radio"
                   id="optionOne"
                   name="option"
                   value="optionOne"
-                  onChange={this.handleChange}
                   defaultChecked
+                  onChange={this.handleChange}
                 />
                 <label htmlFor="optionOne">{optionOne.text}</label>
                 <input
@@ -114,7 +116,7 @@ class QuestionsPage extends Component {
                   onChange={this.handleChange}
                 />
                 <label htmlFor="optionTwo">{optionTwo.text}</label>
-                <input type="submit" value="Submit Vote" className="voteBtn" />
+                <input type="submit" value="Submit Vote" onClick={this.handleSubmit} />
               </form>
             )}
           </div>
@@ -128,11 +130,30 @@ QuestionsPage.propTypes = {
   question: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ users, authedUser }) {
+
+function mapStateToProps({ questions, users, authedUser }, { match }) {
+  const id = match.params.id;
+  const thisQuestion = questions[id];
+  let isTheQAnswered = false;
+  const not_found = true;
+  if (thisQuestion === undefined) {
+    return {
+      not_found,
+    };
+  } else {
+    if (thisQuestion.optionOne.votes.includes(authedUser) || thisQuestion.optionTwo.votes.includes(authedUser)) {
+      isTheQAnswered = true;
+    }
+  }
+  const askedUser = users[thisQuestion.author];
   return {
+    thisQuestion,
+    askedUser,
+    questions,
+    isTheQAnswered,
     authedUser,
-    users,
   };
 }
 
-export default connect(mapStateToProps)(QuestionsPage);
+
+export default withRouter(connect(mapStateToProps)(QuestionsPage));
