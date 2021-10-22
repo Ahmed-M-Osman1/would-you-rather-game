@@ -21,7 +21,7 @@ class EachQuestionItem extends Component {
           sx={{ width: "600px", textAlign: "center" }}
           style={{
             marginLeft: "25%",
-            marginTop: "6.3%",
+            marginTop: "7.2%",
             overflow: "hidden",
           }}
         >
