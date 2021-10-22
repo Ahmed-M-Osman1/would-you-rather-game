@@ -11,13 +11,12 @@ import MainQuestionsPage from "./MainQuestionsPage";
 import { connect } from "react-redux";
 import {
   Route,
-  Switch,
   Redirect,
   BrowserRouter as Router,
 } from "react-router-dom";
-import TestComp from "./testComp";
 
 class App extends Component {
+// handle initial data
   componentDidMount() {
     this.props.handleInitialData();
   }
@@ -28,9 +27,9 @@ class App extends Component {
           <React.Fragment>
           <NavBar />
             <div className="outerDiv">
-              {this.props.loggedOutUser ? (
+            {/** force to load the Login Page */}  
+            {this.props.loggedOutUser ? (
                 <LoginPage />
-
               ) : (
                 <div>
                   <Route exact path="/">

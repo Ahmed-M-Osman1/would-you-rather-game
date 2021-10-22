@@ -12,7 +12,9 @@ import QuestionsNav from "./QuestionsNav";
 import { connect } from "react-redux";
 import QuestionsPage from "./QuestionsPage";
 import EachQuestionItem from "./EachQuestionItem";
-import { useSelector } from "react-redux";
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
 class MainQuestionsPage extends Component {
   state = {
     displayUnanswered: true,
@@ -40,7 +42,7 @@ class MainQuestionsPage extends Component {
             </button>
             <div>
               {this.state.displayUnanswered ? (
-                <div>
+                <div className="centered">
                   {this.props.theUnAnsweredQuestions.map((question) => (
                     <EachQuestionItem key={question.id} question={question} />
                   ))}

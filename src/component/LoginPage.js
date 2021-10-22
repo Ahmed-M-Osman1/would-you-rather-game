@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {setAuthedUser} from '../action/AuthedUser'
 import PropTypes from "prop-types";
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 
 class LoginPage extends Component {
 
@@ -18,10 +20,21 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <div>
-          <p>Welcome to WOULD YOU RATHER game</p>
-          <p>This Game is simple. You should Choose between 2 different option</p>
-          <p>Please Choose one of the characters to start</p>
+      <Card sx={{ maxWidth: 500 }}
+      style={{
+        position: "absolute",
+        left: "20%",
+        top: "20%",
+      }}
+      >
+        <div >
+
+        <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
+        <h2>Welcome to WOULD YOU RATHER game</h2>
+        <p>This Game is simple. You should Choose between 2 different option</p>
+        <p>Please Choose one of the characters to start</p>
+        </Typography>
+          
         </div>
           <span id="login-form">
             <select id="users">
@@ -35,7 +48,7 @@ class LoginPage extends Component {
               Sign In
             </button>
           </span>
-          <div></div>
+          </Card>
         </div>
     );
   }

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect,withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { handleAnswerQuestion } from "../action/Question";
-
+import { Button } from "@material-ui/core";
+import SendIcon from "@mui/icons-material/Send";
+import HomeIcon from '@mui/icons-material/Home';
 class QuestionsPage extends Component {
   state = {
     SelectedOption: "optionOne",
@@ -95,6 +97,19 @@ class QuestionsPage extends Component {
                   </div>
                   <div>{`${optionTwo.votes.length} Out Of ${totalVotes}`}</div>
                 </div>
+                <Button
+                style={{
+                  borderRadius: 35,
+                  backgroundColor: "#00897b",
+                  padding: "2px 10px"
+                }}
+                onClick={() => {
+                  this.props.history.push('/')
+                }}
+                endIcon={<HomeIcon />}
+              >
+              Go to Home Page 
+              </Button>
               </form>
             ) : (
               <form>
@@ -116,7 +131,21 @@ class QuestionsPage extends Component {
                   onChange={this.handleChange}
                 />
                 <label htmlFor="optionTwo">{optionTwo.text}</label>
-                <input type="submit" value="Submit Vote" onClick={this.handleSubmit} />
+                <br/>
+                <Button
+                  type="submit"
+                  value="Submit Vote"
+                  onClick={this.handleSubmit}
+                  variant="contained"
+                  style={{
+                    borderRadius: 35,
+                    backgroundColor: "#42a5f5",
+                    padding: "2px 10px",
+                  }}
+                  endIcon={<SendIcon />}
+                >
+                Submit Vote
+                </Button>
               </form>
             )}
           </div>
@@ -130,7 +159,6 @@ QuestionsPage.propTypes = {
   question: PropTypes.object.isRequired,
 };
 
-
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   const id = match.params.id;
   const thisQuestion = questions[id];
@@ -141,7 +169,10 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
       not_found,
     };
   } else {
-    if (thisQuestion.optionOne.votes.includes(authedUser) || thisQuestion.optionTwo.votes.includes(authedUser)) {
+    if (
+      thisQuestion.optionOne.votes.includes(authedUser) ||
+      thisQuestion.optionTwo.votes.includes(authedUser)
+    ) {
       isTheQAnswered = true;
     }
   }
@@ -154,6 +185,5 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
     authedUser,
   };
 }
-
 
 export default withRouter(connect(mapStateToProps)(QuestionsPage));
