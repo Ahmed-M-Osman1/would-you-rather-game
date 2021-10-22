@@ -19,14 +19,14 @@ class NavBar extends Component {
     return (
       <div>
 
-        <ButtonGroup variant="contained" style={{ color: "#eceff1" , backgroundColor : "#bbdefb", textAlign: "center", position: "absolute", left: "20%", top: "5%", width: "800px" }}>
+        <ButtonGroup variant="contained" style={{ color: "#eceff1" , backgroundColor : "#bbdefb", textAlign: "center", position: "absolute", left: "20%", top: "5%", width: "800px", height: "30"}}>
         <Link style={{ textDecoration: 'none' }} to="/questions"><Button> Home Page </Button></Link>
         <Link style={{ textDecoration: 'none' }} to="/add"><Button> New Question </Button></Link>
         <Link style={{ textDecoration: 'none' }} to="/leaderboard" ><Button>Leader board</Button></Link>
 
         
         <p style={{ color: 'red' , display: 'flex', marginLeft: "auto" }}>Hello, {signOut ? "Please Login" : " Welcome back " + user.name}</p> 
-        <Avatar alt="Remy Sharp" src={signOut ? null : user.avatarURL} />
+        <Avatar alt="user avatar" src={signOut ? null : user.avatarURL} />
         <Link style={{ textDecoration: 'none' }} to="/questions"> <Button style={{ color: "#eceff1" ,backgroundColor : "#b71c1c" }} onClick={this.handleSignOutCLick}>Sign Out</Button></Link>
         </ButtonGroup>
       </div>
