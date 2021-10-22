@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../action/AuthedUser";
-import Leaderboard from './LeaderBoard'
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+
 
 class NavBar extends Component {
   // sign out click
@@ -15,21 +19,18 @@ class NavBar extends Component {
     const { signOut, user } = this.props;
     return (
       <div>
-        <ul>
-          <NavLink to="/questions">
-            Main Page
-          </NavLink>
-          <NavLink to="/add">New Question</NavLink>
-          <NavLink to="/leaderboard" >Leader board</NavLink>
-          <li>
-          Hello, {signOut ? "Please Login" : " Welcome back " + user.name}
-            
-            <div>
-              <button onClick={this.handleSignOutCLick}>Sign Out</button>
-            </div>
-            <div></div>
-          </li>
-        </ul>
+
+        <ButtonGroup variant="contained" style={{ color: "#eceff1" , backgroundColor : "#bbdefb", textAlign: "center", position: "absolute", left: "20%", top: "5%", width: "800px" }}>
+        <Link to="/questions"><Button> Home Page </Button></Link>
+        <Link to="/add"><Button> New Question </Button></Link>
+        <Link to="/leaderboard" ><Button>Leader board</Button></Link>
+
+        <Typography style={{ color: 'red' , display: 'flex', marginLeft: "auto" }}>
+        Hello, {signOut ? "Please Login" : " Welcome back " + user.name} 
+        <Avatar alt="Remy Sharp" src={signOut ? null : user.avatarURL} />
+        </Typography>
+        <Link to="/questions"> <Button style={{ color: "#eceff1" ,backgroundColor : "#b71c1c" }} onClick={this.handleSignOutCLick}>Sign Out</Button></Link>
+        </ButtonGroup>
       </div>
     );
   }

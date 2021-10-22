@@ -5,9 +5,13 @@ import {setAuthedUser} from '../action/AuthedUser'
 import PropTypes from "prop-types";
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
+import logo from '../img/logo.png'
+import { Button } from "@material-ui/core";
+import LoginIcon from '@mui/icons-material/Login';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 class LoginPage extends Component {
-
 
   handleSignIn = () => {
     const { dispatch } = this.props;
@@ -18,36 +22,41 @@ class LoginPage extends Component {
   };
 
   render() {
+    
+      
+
     return (
       <div>
-      <Card sx={{ maxWidth: 500 }}
+      <Card sx={{ width: "800px" ,textAlign: "center" }}
       style={{
         position: "absolute",
         left: "20%",
-        top: "20%",
+        top: "10%",
       }}
       >
         <div >
 
         <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
-        <h2>Welcome to WOULD YOU RATHER game</h2>
+        <h1>Welcome to WOULD YOU RATHER game</h1>
+        <img style={{ width: "300px", height: "250px" }} src={logo}/>
         <p>This Game is simple. You should Choose between 2 different option</p>
         <p>Please Choose one of the characters to start</p>
         </Typography>
           
         </div>
-          <span id="login-form">
-            <select id="users">
+          
+        <select id="users" style={{width: "150px", textAlign: "center" }}>
               {this.props.allUsers.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name}
                 </option>
               ))}
             </select>
-            <button id="sign-in" onClick={this.handleSignIn}>
+
+            <br/>
+            <Button variant="contained" style={{ margin: '5px 0' ,backgroundColor: "#42a5f5", }} onClick={this.handleSignIn} startIcon={<LoginIcon />}>
               Sign In
-            </button>
-          </span>
+            </Button>
           </Card>
         </div>
     );
@@ -68,4 +77,5 @@ function mapStateToProps({ users, authedUser }) {
     authedUser,
   };
 }
+
 export default withRouter(connect(mapStateToProps)(LoginPage));

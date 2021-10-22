@@ -6,6 +6,7 @@ import { handleAnswerQuestion } from "../action/Question";
 import { Button } from "@material-ui/core";
 import SendIcon from "@mui/icons-material/Send";
 import HomeIcon from '@mui/icons-material/Home';
+import Card from '@mui/material/Card';
 class QuestionsPage extends Component {
   state = {
     SelectedOption: "optionOne",
@@ -37,6 +38,13 @@ class QuestionsPage extends Component {
 
     return (
       <div>
+      <Card sx={{ width: "800px" ,textAlign: "center" }}
+      style={{
+        position: "absolute",
+        left: "20%",
+        top: "10%",
+      }}
+      >
         <div>
           <p>{thisQuestion.author} Ask: Would You Rather</p>
         </div>
@@ -150,7 +158,9 @@ class QuestionsPage extends Component {
             )}
           </div>
         </div>
+        </Card>
       </div>
+
     );
   }
 }
