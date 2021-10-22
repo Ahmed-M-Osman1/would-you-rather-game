@@ -4,12 +4,9 @@ import { withRouter } from "react-router-dom";
 import {setAuthedUser} from '../action/AuthedUser'
 import PropTypes from "prop-types";
 import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
 import logo from '../img/logo.png'
 import { Button } from "@material-ui/core";
 import LoginIcon from '@mui/icons-material/Login';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 
 class LoginPage extends Component {
 
@@ -35,13 +32,10 @@ class LoginPage extends Component {
       }}
       >
         <div >
-
-        <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
-        <h1>Welcome to WOULD YOU RATHER game</h1>
+        <h1 style={{ textAlign: "center" , fontSize: 14, color: '#01579b'}} >Welcome to WOULD YOU RATHER game</h1>
         <img style={{ width: "300px", height: "250px" }} src={logo}/>
-        <p>This Game is simple. You should Choose between 2 different option</p>
-        <p>Please Choose one of the characters to start</p>
-        </Typography>
+        <p style={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>This Game is simple. You should Choose between 2 different option</p>
+        <p style={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>Please Choose one of the characters to start</p>
           
         </div>
           

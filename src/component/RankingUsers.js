@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import Card from "@mui/material/Card";
 import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';

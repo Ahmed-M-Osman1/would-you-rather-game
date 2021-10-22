@@ -1,20 +1,7 @@
 import React, { Component } from "react";
-import ListOfQuestions from "./ListOfQuestions";
 import PropTypes from "prop-types";
-import {
-  Route,
-  withRouter,
-  Switch,
-  Redirect,
-  BrowserRouter,
-} from "react-router-dom";
-import QuestionsNav from "./QuestionsNav";
 import { connect } from "react-redux";
-import QuestionsPage from "./QuestionsPage";
 import EachQuestionItem from "./EachQuestionItem";
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import { Button } from "@material-ui/core";
 import ButtonGroup from '@mui/material/ButtonGroup';
 
@@ -36,8 +23,8 @@ class MainQuestionsPage extends Component {
     return (
       <React.Fragment>
         <div>
-          <div className="questions">
-          <ButtonGroup style={{ backgroundColor: "#42a5f5", position: 'absolute', marginLeft: '35%', marginTop: '-0.7%'}}>
+          <div style={{ backgroundColor: "#42a5f5", position: 'absolute', marginLeft: '35%', marginTop: '-0.7%'}}>
+          <ButtonGroup >
           <Button variant="contained" onClick={this.handleSortingAnsweredQuestion} >
               Answered Questions
             </Button>
@@ -46,7 +33,6 @@ class MainQuestionsPage extends Component {
             </Button>
             </ButtonGroup>
             </div>
-            <div>
             <div>
               {this.state.displayUnanswered ? (
                 <div className="centered">
@@ -61,7 +47,6 @@ class MainQuestionsPage extends Component {
                   ))}
                 </div>
               )}
-            </div>
           </div>
         </div>
       </React.Fragment>

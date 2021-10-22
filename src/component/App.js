@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import {
   Route,
   Redirect,
-  BrowserRouter as Router,
 } from "react-router-dom";
 
 class App extends Component {

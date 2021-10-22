@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
 import { handleAnswerQuestion } from "../action/Question";
 import { Button } from "@material-ui/core";
 import SendIcon from "@mui/icons-material/Send";
 import HomeIcon from '@mui/icons-material/Home';
 import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 
 class QuestionsPage extends Component {
@@ -51,7 +49,6 @@ class QuestionsPage extends Component {
       }}
     >
     <div>
-    <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
           <p style={{ color: '#1a237e', fontWeight: "bold" , fontSize: "26px"}} >{thisQuestion.author} Ask: Would You Rather ? </p>
         
         <div>
@@ -74,7 +71,7 @@ class QuestionsPage extends Component {
                     thisQuestion.optionOne.votes.includes(authedUser) ? <DoneOutlineOutlinedIcon /> : null
                   } {optionOne.text}
                   </div>
-                  <label >{`${optionOne.votes.length} Out Of ${totalVotes} ` +'('+ Math.floor((100*`${optionOne.votes.length}`)/`${totalVotes}`) +'%)'} </label>
+                  <label >{`${optionOne.votes.length} Out Of ${totalVotes} ` + ' : (' +`${this.voteCalculation(optionOne.votes.length, totalVotes)}` +'%)' } </label>
                 </div>
 
                 <div >
@@ -82,7 +79,7 @@ class QuestionsPage extends Component {
                     thisQuestion.optionTwo.votes.includes(authedUser) ? <DoneOutlineOutlinedIcon /> : null
                   } {optionTwo.text}
                   </div>
-                  <label>{`${optionTwo.votes.length} Out Of ${totalVotes} ` +'('+ Math.floor((100*`${optionTwo.votes.length}`)/`${totalVotes}`) +'%)' }</label>
+                  <label>{`${optionTwo.votes.length} Out Of ${totalVotes} ` +  ' : (' + `${this.voteCalculation(optionTwo.votes.length, totalVotes)}` +'%)' }</label>
                 </div>
                 </div>
                 <Button
@@ -140,17 +137,12 @@ class QuestionsPage extends Component {
             )}
           </div>
         </div>
-        </Typography>
       </div>
       </Card>
       </div>
     );
   }
 }
-
-QuestionsPage.propTypes = {
-  question: PropTypes.object.isRequired,
-};
 
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   const id = match.params.id;

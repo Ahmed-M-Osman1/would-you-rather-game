@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import {
-  BrowserRouter,
   Link,
-  Switch,
-  Route,
   withRouter,
-  Redirect,
 } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
-import Typography from '@mui/material/Typography';
 import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
 import Filter2OutlinedIcon from '@mui/icons-material/Filter2Outlined';
 import { Button } from "@material-ui/core";
@@ -30,7 +25,6 @@ class EachQuestionItem extends Component {
             overflow: "hidden",
           }}
         >
-        <Typography sx={{ textAlign: "center" , fontSize: 14, color: '#01579b'}}>
           <div>
             <div>
               <img
@@ -47,7 +41,7 @@ class EachQuestionItem extends Component {
             </div>
             <div style={{ margin: 0 }} > 
             <p style={{ color: '#1a237e', fontWeight: "bold" , fontSize: "26px"}} >{user.name} Ask:</p>
-            <p> Would You Rather: </p>
+            <p style={{ textAlign: "center" , fontSize: 14, color: '#01579b'}} > Would You Rather: </p>
             </div>
           </div>
           <div>
@@ -66,7 +60,6 @@ class EachQuestionItem extends Component {
               </Link>
             </div>
           </div>
-          </Typography>
         </Card>
       </div>
     );
