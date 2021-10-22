@@ -11,22 +11,22 @@ export function receiveUsers (users) {
 // Action: Ask Q
 export const ADD_QUESTION = "ADD_QUESTION";
 
-export function addQuestion(authedUser, questionId) {
+export function addQuestion(authedUser, qid) {
     return {
       type: ADD_QUESTION,
       authedUser,
-      questionId
+      qid
       };
   }
 
   //Action: Answer Q
 export const ADD_ANSWER = "ADD_ANSWER";
 
-export function addAnswer( authedUser, questionId, answer ) {
+export function addAnswer( authedUser, qid, answers ) {
     return {
       type: ADD_ANSWER,
       authedUser,
-      questionId,
-      answer,
+      qid,
+      answers,
     };
   }

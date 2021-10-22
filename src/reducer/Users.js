@@ -15,7 +15,7 @@ export default function users(state = {}, action) {
         ...state,
         [authedUser.authedUser]: {
           ...state[authedUser.authedUser],
-          answers: {...state[authedUser.authedUser].answers,  [questionId]: authedUser.answer},
+          answers: {...state[authedUser.authedUser].answers,  [authedUser.questionId]: authedUser.answer},
         },
       };
       case ADD_QUESTION:
