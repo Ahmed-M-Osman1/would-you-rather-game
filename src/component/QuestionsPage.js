@@ -6,7 +6,7 @@ import { handleAnswerQuestion } from "../action/Question";
 
 class QuestionsPage extends Component {
   state = {
-    SelectedOption: "Nothing_selected",
+    SelectedOption: "optionOne",
   };
 
   voteCalculation = (votes, totalVotes) => {
