@@ -1,10 +1,14 @@
 # Getting Started with Would You Rather Game app:
 
-This project is a part of become react & redux FWD scholarship (https://egfwd.com/) at Udacity (https://www.udacity.com/).
-
-
 ![Alt Text](https://github.com/akiid777/would-you-rather-game/blob/master/would-you-rather-game.gif)
 
+This project is a part of become react & redux FWD scholarship (https://egfwd.com/) at Udacity (https://www.udacity.com/).
+
+In this project, you will find the Would You Rather Game app with 3 default users (Tyler, Sarah and john).
+
+You can log in with any of the 3 users. you can reply to a previously asked question and see your previously answer with a percentage to this answer. Or you can ask a new question. There is a Leader board that represents the score of each player in this game.
+
+for view, please visit: https://kind-keller-ea21ae.netlify.app/
 
 ## Available Scripts
 
